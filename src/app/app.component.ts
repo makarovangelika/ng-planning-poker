@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { RegistrationService } from './services/registration.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'ng-planning-poker';
+  currentUser = this.registrationService.registration;
+
+  constructor(private registrationService: RegistrationService) {}
 }

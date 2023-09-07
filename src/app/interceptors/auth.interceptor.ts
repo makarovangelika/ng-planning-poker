@@ -14,10 +14,10 @@ export class AuthInterceptor implements HttpInterceptor {
   constructor(private auth: RegistrationService) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    if (this.auth.token) {
+    if (this.auth.registration) {
       request = request.clone({
         setHeaders: {
-          "Authorization": this.auth.token
+          "Authorization": this.auth.registration.token
         }
       })
     }

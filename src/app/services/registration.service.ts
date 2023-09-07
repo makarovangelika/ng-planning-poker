@@ -10,17 +10,14 @@ import { url } from './baseUrl';
 })
 export class RegistrationService {
 
-  token!: string;
+  registration!: Registration;
 
   constructor(private http: HttpClient) { }
   registerUser(name: string): Observable<Registration> {
     return this.http.post<Registration>(`${url}/register`, {
-      method: "POST",
-        body: JSON.stringify({
-            name: name
-    })
-  }).pipe(
-    tap(registration => this.token = registration.token)
-  )
-}
+      name: name
+    }).pipe(
+      tap(registration => this.registration = registration)
+    )
+  }
 }
