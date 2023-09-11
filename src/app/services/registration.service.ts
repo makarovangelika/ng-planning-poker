@@ -17,7 +17,9 @@ export class RegistrationService {
     return this.http.post<Registration>(`${url}/register`, {
       name: name
     }).pipe(
-      tap(registration => this.registration = registration)
+      tap(registration => {
+        this.registration = registration;
+      })
     )
   }
 }
