@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 export class NewRoomFormComponent implements OnInit {
   templates: Template[] = [];
   roomName = '';
-  selectedTemplate = 0;
+  selectedTemplate = '0';
 
   constructor(public createRoomService: CreateRoomService,
               private router: Router) {}
@@ -23,7 +23,7 @@ export class NewRoomFormComponent implements OnInit {
 
   handleCreateRoom($event: any) {
     $event.preventDefault();
-    this.createRoomService.createRoom(this.roomName, this.selectedTemplate)
+    this.createRoomService.createRoom(this.roomName, parseInt(this.selectedTemplate, 10))
       .subscribe(roomResponse => {
         this.router.navigate(['/rooms', roomResponse.id])
       })

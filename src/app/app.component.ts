@@ -8,7 +8,6 @@ import { RegistrationService } from './services/registration.service';
 })
 export class AppComponent {
   title = 'ng-planning-poker';
-  currentUser = this.registrationService.registration;
 
-  constructor(private registrationService: RegistrationService) {}
+  constructor(public registrationService: RegistrationService) {}
 }
