@@ -39,3 +39,6 @@ export interface IRoom {
         active: boolean
     }[]
 }
+
+export const statusVoting = 1;
+export const statusVoted = 2;

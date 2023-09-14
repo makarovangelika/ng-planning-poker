@@ -1,1 +1,28 @@
-<p>room works!</p>
+<div *ngIf="room" class="relative">
+    <button
+        appButtonStyle
+        class="text-base sm:text-lg px-3 py-2 absolute right-0"
+        (click)="handleLeaveRoom()">Leave room
+    </button>
+</div>
+<div class="flex flex-col items-center">
+    <h2 class="text-xl sm:text-2xl text-indigo-500 mb-8">{{room.name}}</h2>
+    <div class="flex justify-center flex-wrap">
+        <app-seat *ngFor="let seat of room.seats" [room]="room" [seat]="seat" [active]="seat.active"></app-seat>
+    </div>
+        <button *ngIf="room.owner && statusVoted" appButtonStyle
+            (click)="handleResetRoom()">
+                Reset room
+        </button>
+        <button *ngIf="room.owner && !statusVoted" appButtonStyle
+            (click)="handleEndVote()">
+                Show cards
+        </button>
+        <div *ngIf="!room.owner" class="rounded-md bg-indigo-500 opacity-50 text-slate-50 p-6 mt-3">
+            {{statusVoted ? "Vote ended" : "Waiting for players' votes..."}}
+        </div>
+    <div class="mt-6 flex justify-center flex-wrap gap-y-1">
+        <app-card *ngFor="let card of room.voteCards; let index = index" [disabled]="statusVoted" [vote]="card" [value]="index"></app-card>
+    </div>
+</div>
+<span *ngIf="!room">Loading</span>

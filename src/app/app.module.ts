@@ -9,6 +9,9 @@ import { RoomComponent } from './components/room/room.component';
 import { NewRoomFormComponent } from './components/new-room-form/new-room-form.component';
 import { FormsModule } from '@angular/forms';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { SeatComponent } from './components/seat/seat.component';
+import { CardComponent } from './components/card/card.component';
+import { ButtonStyleDirective } from './directives/button-style.directive';
 
 const appRoutes: Routes = [
   { path: '', component: MainComponent },
@@ -20,7 +23,10 @@ const appRoutes: Routes = [
     AppComponent,
     MainComponent,
     RoomComponent,
-    NewRoomFormComponent
+    NewRoomFormComponent,
+    SeatComponent,
+    CardComponent,
+    ButtonStyleDirective
   ],
   imports: [
     BrowserModule,
