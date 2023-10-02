@@ -1,1 +1,13 @@
-<p>seat works!</p>
+<div [ngClass]="{'opacity-30': !active}"
+    class= "flex flex-col items-center m-1">
+    <div [ngClass]="{
+        'border-2 border-indigo-500 text-indigo-500': statusVoted,
+        'text-slate-50': !statusVoted,
+        'bg-indigo-500': !statusVoted && seat.voted,
+        'bg-slate-300': !statusVoted && !seat.voted
+        }"
+        class="rounded-md w-9 h-16 flex justify-center items-center">
+        {{ seat.voteOpened ? createRoomService.voteToString(seat.vote) : '' }}
+    </div>
+    <span class="text-base font-bold">{{seat.user.name}}</span>
+</div>

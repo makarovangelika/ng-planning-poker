@@ -14,7 +14,13 @@ export class RoomComponent implements OnInit {
 
   room!: IRoom;
   id!: string;
-  statusVoted = this.room.status === statusVoted;
+
+  get statusVoted() {
+    if (!this.room) {
+      return false
+    }
+    return this.room.status === statusVoted
+  }
 
   constructor(private registrationService: RegistrationService,
               private roomService: RoomService,

@@ -1,1 +1,9 @@
-<p>card works!</p>
+<button [disabled]="disabled" (click)="handleVote()"
+        class="rounded-md border-2 m-1 w-9 h-16"
+        [ngClass]="{
+            'text-slate-50 bg-slate-300 border-slate-300': disabled,
+            'text-indigo-500 hover:text-slate-50 hover:bg-indigo-500 ease-in-out duration-200 border-indigo-500': !disabled,
+            'relative -top-2 bg-indigo-500 text-slate-50': !disabled && vote.active
+        }">
+            {{createRoomService.voteToString(vote.vote)}}
+</button>

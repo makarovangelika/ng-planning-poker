@@ -40,5 +40,9 @@ export interface IRoom {
     }[]
 }
 
+export interface VoteResponse {
+    message: "Voted"
+}
+
 export const statusVoting = 1;
 export const statusVoted = 2;
