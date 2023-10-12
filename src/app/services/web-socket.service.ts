@@ -5,17 +5,19 @@ import { WebSocketSubject, webSocket } from 'rxjs/webSocket';
   providedIn: 'root'
 })
 export class WebSocketService {
-  private socket$!: WebSocketSubject<any>;
+  public socket$!: WebSocketSubject<any> | null;
 
   constructor() { }
   
   public getNewWebSocket(WS_ENDPOINT: string) {
     if (!this.socket$ || this.socket$.closed) {
-      return webSocket(WS_ENDPOINT);
+      return webSocket<any>(WS_ENDPOINT);
     } else { return null };
   }
 
   close() {
-    this.socket$.complete();
+    if (this.socket$) {
+      this.socket$.complete();
+    }
   }
 }

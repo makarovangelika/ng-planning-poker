@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IRoom, statusVoted } from 'src/app/models';
 import { RegistrationService } from 'src/app/services/registration.service';
@@ -6,13 +6,14 @@ import { RoomService } from 'src/app/services/room.service';
 import { map } from 'rxjs/operators';
 import { WebSocketService } from 'src/app/services/web-socket.service';
 import { urlInstance } from 'src/app/services/baseUrl';
+import { WebSocketSubject } from 'rxjs/webSocket';
 
 @Component({
   selector: 'app-room',
   templateUrl: './room.component.html',
   styleUrls: ['./room.component.css']
 })
-export class RoomComponent implements OnInit {
+export class RoomComponent implements OnInit, OnDestroy {
 
   room!: IRoom;
   id!: string;
@@ -37,15 +38,19 @@ export class RoomComponent implements OnInit {
       .subscribe(room => {
         this.room = room;
         urlInstance.protocol = urlInstance.protocol === 'https:' ? 'wss:' : 'ws:';
-        const wsConn = this.webSocketService.getNewWebSocket(`${urlInstance.href}rooms/${this.id}/subscribe?authorization=${this.registrationService.registration?.token}`);
-        if (wsConn) {
-          wsConn.subscribe({
-            next: message => {
-              this.room = message as IRoom;
+        this.webSocketService.socket$ = this.webSocketService.getNewWebSocket(`${urlInstance.href}rooms/${this.id}/subscribe?authorization=${this.registrationService.registration?.token}`);
+        if (this.webSocketService.socket$) {
+          this.webSocketService.socket$.subscribe({
+            next: (message: IRoom) => {
+              this.room = message;
             }
           })
         }
       });
+  }
+
+  ngOnDestroy() {
+    this.webSocketService.close();
   }
 
   handleResetRoom() {
