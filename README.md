@@ -1,27 +1,28 @@
 # NgPlanningPoker
-
+This web application allows to use planning poker for estimating of tasks' complexity during the work on the project.\
+The API for the project is [here](https://github.com/violarium/poplan).\
+This project was built to practice working with **Angular** and **TypeScript**. It also uses **WebSocket** to allow real-time changes.\
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.1.
+## Features
+The starting page shows the registration form
 
+![Registration page](readme/registration-page.png)
+or the form for creating new room for the voting if the user is logged in.
+
+![Page with the form for creating new room](readme/create-room-form.png)
+When the room is created, the user is redirected to the room page. Following the link of the room page any user can join the voting in this room. Players pick the cards and can see only their own cards.
+
+![Room page](readme/room-page.png)
+The owner of the room (the person who created it) can reveal the cards at any moment. When the cards are revealed the picking cards is unavailable.
+
+![Room with revealed cards](readme/revealed-cards.png)
+
+The owner of the room also can reset the room which reset the votes to start a new voting.
+## Technologies
+During the development of this project these technologies were used:
+* Angular 16.2.3
+* TypeScript 5.1.3
+* WebSocket
+* Tailwindcss 3.3.3
 ## Development server
-
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`.
